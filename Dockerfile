@@ -39,7 +39,7 @@ RUN export ND_ENTRYPOINT="/neurodocker/startup.sh" \
 
 ENTRYPOINT ["/neurodocker/startup.sh"]
 
-ENV PATH="/opt/dcm2niix-v1.0.20190410/bin:$PATH"
+ENV PATH="/opt/dcm2niix-v1.0.20190720/bin:$PATH"
 RUN apt-get update -qq \
     && apt-get install -y -q --no-install-recommends \
            cmake \
@@ -54,10 +54,10 @@ RUN apt-get update -qq \
     && git clone https://github.com/rordenlab/dcm2niix /tmp/dcm2niix \
     && cd /tmp/dcm2niix \
     && git fetch --tags \
-    && git checkout v1.0.20190410 \
+    && git checkout v1.0.20190720 \
     && mkdir /tmp/dcm2niix/build \
     && cd /tmp/dcm2niix/build \
-    && cmake  -DCMAKE_INSTALL_PREFIX:PATH=/opt/dcm2niix-v1.0.20190410 .. \
+    && cmake  -DCMAKE_INSTALL_PREFIX:PATH=/opt/dcm2niix-v1.0.20190720 .. \
     && make \
     && make install \
     && rm -rf /tmp/dcm2niix
@@ -90,7 +90,7 @@ RUN export PATH="/opt/miniconda-latest/bin:$PATH" \
     && conda config --system --set show_channel_urls true \
     && sync && conda clean -tipsy && sync \
     && conda install -y -q --name base \
-           'python=3.6' \
+           'python=3.7' \
            'traits>=4.6.0' \
            'scipy' \
            'numpy' \
@@ -115,7 +115,7 @@ RUN echo '{ \
     \n    [ \
     \n      "dcm2niix", \
     \n      { \
-    \n        "version": "v1.0.20190410", \
+    \n        "version": "v1.0.20190720", \
     \n        "method": "source" \
     \n      } \
     \n    ], \
