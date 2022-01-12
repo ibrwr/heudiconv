@@ -42,7 +42,8 @@ def create_seqinfo(mw, series_files, series_id):
         size.append(1)
 
     # parse DICOM for seqinfo fields
-    TR = get_typed_attr(dcminfo, "RepetitionTime", float, -1000) / 1000
+    TR = get_typed_attr(dcminfo, "RepetitionTime", float, -1000) 
+    TI = get_typed_attr(dcminfo, "InversionTime", float, -1000) 
     TE = get_typed_attr(dcminfo, "EchoTime", float, -1)
     refphys = get_typed_attr(dcminfo, "ReferringPhysicianName", str, "")
     image_type = get_typed_attr(dcminfo, "ImageType", tuple, ())
@@ -75,6 +76,7 @@ def create_seqinfo(mw, series_files, series_id):
         dim4=size[3],
         TR=TR,
         TE=TE,
+        TI=TI,
         protocol_name=dcminfo.ProtocolName,
         is_motion_corrected=is_moco,
         is_derived='derived' in [x.lower() for x in image_type],
