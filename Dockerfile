@@ -76,6 +76,8 @@ RUN apt-get update -qq \
 
 COPY [".", "/src/heudiconv"]
 
+RUN chmod -R o+rX /src/heudiconv
+
 ENV CONDA_DIR="/opt/miniconda-latest" \
     PATH="/opt/miniconda-latest/bin:$PATH"
 RUN export PATH="/opt/miniconda-latest/bin:$PATH" \
